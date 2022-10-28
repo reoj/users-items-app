@@ -1,29 +1,29 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from "react";
 
-import Modal from "react-bootstrap/Modal"
-import CustomForm from './CustomForm';
+import Modal from "react-bootstrap/Modal";
 
 function CustomModal(props) {
-    const st = props.status;
+  const st = props.status;
 
-    function onCloseHandle(oldData) {
-        props.controller({
-            ...oldData,
-            onDisplay: false
-        })
-    }
-    function saveData(params) {
-        
-    }
+  function onCloseHandle(oldData) {
+    props.controller({
+      ...oldData,
+      onDisplay: false,
+    });
+  }
+
+  
   return (
     <Modal show={st.onDisplay} onHide={onCloseHandle}>
       <Modal.Header closeButton>
         <Modal.Title>{st.title}</Modal.Title>
       </Modal.Header>
 
-      <CustomForm closeAction ={onCloseHandle} saveAction = {saveData}></CustomForm>
+      <Fragment>
+        {st.body}        
+      </Fragment>
     </Modal>
-  )
+  );
 }
 
-export default CustomModal
+export default CustomModal;

@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button"
 
 function TableDisplayer(props) {
   const fielsList = props.colList;
-  const dataList = props.data;
 
   return (
     <div className="table-responsive">
@@ -26,10 +25,7 @@ function TableDisplayer(props) {
             <th colSpan="2">Actions</th>
           </tr>
         </thead>
-        <tbody className="table-group-divider">
-          {dataList.map((u) => {
-            return (<tr key={props.modelType + Math.random().toString()}>{u}</tr>);
-          })}
+        <tbody className="table-group-divider">{props.children}
         </tbody>
       </Table>
     </div>

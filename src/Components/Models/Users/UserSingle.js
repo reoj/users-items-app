@@ -3,11 +3,11 @@ import ActionButtons from '../../UI/ActionButtons'
 
 function UserSingle(props) {
   return (
-    <Fragment>
-        <td>{props.id}</td>
+    <tr>
+        <td>{props.idn}</td>
         <td>{props.name}</td>
         <ActionButtons/>
-    </Fragment>
+    </tr>
   )
 }
 
