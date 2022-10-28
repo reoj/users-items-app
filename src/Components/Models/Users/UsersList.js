@@ -5,17 +5,17 @@ import AddUser from "./AddUser";
 
 function UsersList(props) {
   const properties = ["ID", "Name"];
-  const mc = props.modalController
-  const usersList = props.state
-  const setUsersList =props.setter
+  const mc = props.modalController;
+  const usersList = props.state;
+  const setUsersList = props.setter;
 
-  
   const [newUserName, setNewUserName] = useState();
 
   useEffect(() => {
     if (newUserName != undefined) {
+      console.log(newUserName.name);
       const next = usersList.length + 1;
-      usersList.push({id:next,name:newUserName.name})
+      usersList.push({ id: next, name: newUserName.name });
       setUsersList(usersList);
       setNewUserName(undefined);
     }
@@ -25,12 +25,7 @@ function UsersList(props) {
     mc({
       onDisplay: true,
       title: "Adding new user...",
-      body: (
-        <AddUser
-          formController={mc}
-          listController={setNewUserName}
-        />
-      ),
+      body: <AddUser formController={mc} newObjectSetter={setNewUserName} />,
     });
   }
   function EditHandler(params) {}

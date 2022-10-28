@@ -3,12 +3,12 @@ import ActionButtons from '../../UI/ActionButtons'
 
 function ItemSingle(props) {
   return (
-    <Fragment>
-        <td>{props.id}</td>
+    <tr>
+        <td>{props.idn}</td>
         <td>{props.description}</td>
         <td>{props.owner}</td>
         <ActionButtons/>
-    </Fragment>
+    </tr>
   )
 }
 

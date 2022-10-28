@@ -12,11 +12,15 @@ function AddUser(props) {
         });
       }
       function onSaveHandle(oldData){
-        props.listController({name:namefieldRef.current.value})
-        props.formController({
-            ...oldData,
-            onDisplay: false,
-          });
+        if (namefieldRef.current.value != "") {
+        props.newObjectSetter({name:namefieldRef.current.value})
+        onCloseHandle(oldData)
+        }else{
+          namefieldRef.current.className = "form-control bg-danger"
+        }
+      }
+      function onInputClarity(event) {
+        event.target.className = "form-control"
       }
   return (
     <Form>
@@ -27,6 +31,7 @@ function AddUser(props) {
             type="text"
             placeholder="User Name"
             ref={namefieldRef}
+            onFocus={onInputClarity}
           />
         </Form.Group>
       </Modal.Body>

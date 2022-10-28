@@ -13,6 +13,9 @@ function MainDisplay() {
   });
 
   const [usersList, setUsersList] = useState([{ id: 1, name: "Isra" }]);
+  const [itemsList, setItemsList] = useState([
+    { id: 1, desc: "Chair", owner: 1 },
+  ]);
 
   return (
     <Fragment>
@@ -21,10 +24,18 @@ function MainDisplay() {
       )}
       <Container className="w-75 rounded bg-light p-3 my-3">
         <Route path="/Users">
-          <UsersList modalController={setModalProperties} state={usersList} setter={setUsersList}/>
+          <UsersList
+            modalController={setModalProperties}
+            state={usersList}
+            setter={setUsersList}
+          />
         </Route>
         <Route path="/Items">
-          <ItemsList modalController={setModalProperties} />
+          <ItemsList
+            modalController={setModalProperties}
+            state={itemsList}
+            setter={setItemsList}
+          />
         </Route>
       </Container>
     </Fragment>
