@@ -12,6 +12,8 @@ function MainDisplay() {
     message: {},
   });
 
+  const [usersList, setUsersList] = useState([{ id: 1, name: "Isra" }]);
+
   return (
     <Fragment>
       {modalProperties.onDisplay && (
@@ -19,7 +21,7 @@ function MainDisplay() {
       )}
       <Container className="w-75 rounded bg-light p-3 my-3">
         <Route path="/Users">
-          <UsersList modalController={setModalProperties} />
+          <UsersList modalController={setModalProperties} state={usersList} setter={setUsersList}/>
         </Route>
         <Route path="/Items">
           <ItemsList modalController={setModalProperties} />

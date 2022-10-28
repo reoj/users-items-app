@@ -3,10 +3,13 @@ import TableDisplayer from "../../UI/TableDisplayer";
 import UserSingle from "./UserSingle";
 import AddUser from "./AddUser";
 
-function UsersList({ modalController }) {
+function UsersList(props) {
   const properties = ["ID", "Name"];
+  const mc = props.modalController
+  const usersList = props.state
+  const setUsersList =props.setter
 
-  const [usersList, setUsersList] = useState([{ id: 1, name: "Isra" }]);
+  
   const [newUserName, setNewUserName] = useState();
 
   useEffect(() => {
@@ -19,12 +22,12 @@ function UsersList({ modalController }) {
   }, [newUserName]);
 
   function AddHandler(event) {
-    modalController({
+    mc({
       onDisplay: true,
       title: "Adding new user...",
       body: (
         <AddUser
-          formController={modalController}
+          formController={mc}
           listController={setNewUserName}
         />
       ),
