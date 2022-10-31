@@ -1,18 +1,18 @@
-import React, { useContext, useRef} from "react";
+import React, { useContext, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import ModalContext from "../../../Context/modal-context";
 import { useDispatch } from "react-redux";
-import { add } from "../../../Context/user-redux-slice";
+import { edit } from "../../../Context/user-redux-slice";
 
-function AddUser(props) {
-  const modalCtx = useContext(ModalContext)
+function EditUser(props) {
+  const modalCtx = useContext(ModalContext);
   const mc = modalCtx.setter;
 
   const namefieldRef = useRef();
 
-  const dsp = useDispatch()
+  const dsp = useDispatch();
 
   function onCloseHandle(oldData) {
     mc({
@@ -22,7 +22,7 @@ function AddUser(props) {
   }
   function onSaveHandle(oldData) {
     if (namefieldRef.current.value !== "") {
-      dsp(add(namefieldRef.current.value))
+      dsp(edit({id:props.item.id, name:namefieldRef.current.value}));
       onCloseHandle(oldData);
     } else {
       namefieldRef.current.className = "form-control bg-danger";
@@ -42,21 +42,20 @@ function AddUser(props) {
             placeholder="User Name"
             ref={namefieldRef}
             onFocus={onInputClarity}
-            defaultValue={""}
+            defaultValue={props.item.name}
           />
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onCloseHandle}>
+        <Button variant="primary" onClick={onCloseHandle}>
           Close
         </Button>
-        <Button variant="primary" onClick={onSaveHandle}>
+        <Button variant="warning" onClick={onSaveHandle}>
           Save changes
         </Button>
       </Modal.Footer>
     </Form>
-
   );
 }
 
-export default AddUser;
+export default EditUser;

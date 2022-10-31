@@ -11,8 +11,7 @@ function CustomModal(props) {
       onDisplay: false,
     });
   }
-
-  
+    
   return (
     <Modal show={st.onDisplay} onHide={onCloseHandle}>
       <Modal.Header closeButton>
