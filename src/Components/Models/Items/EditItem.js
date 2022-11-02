@@ -2,20 +2,21 @@ import React, { useContext, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
-import { useDispatch } from "react-redux";
-import { addItemR } from "../../../Context/items-redux-slice";
 import ModalContext from "../../../Context/modal-context";
+import { useDispatch } from "react-redux";
+import { editItemR } from "../../../Context/items-redux-slice";
 
-function AddItem(props) {
-  const descfieldRef = useRef();
+function EditItem(props) {
+  const modalCtx = useContext(ModalContext);
+  const mc = modalCtx.setter;
+
   const ownerfieldRef = useRef();
+  const descfieldRef = useRef()
+
   const dsp = useDispatch();
 
-  const modalCtx = useContext(ModalContext)
-  const modalController = modalCtx.setter;
-
   function onCloseHandle(oldData) {
-    modalController({
+    mc({
       ...oldData,
       onDisplay: false,
     });
@@ -29,7 +30,8 @@ function AddItem(props) {
       return;
     }
     dsp(
-      addItemR({
+      editItemR({
+        id: props.item.id,
         desc: descfieldRef.current.value,
         owner: ownerfieldRef.current.value,
       })
@@ -46,9 +48,9 @@ function AddItem(props) {
     return allEmptyFields;
   }
   function onInputClarity(event) {
-    // event..className = "form-control"
     event.target.className = "form-control";
   }
+
   return (
     <Form>
       <Modal.Body>
@@ -59,6 +61,7 @@ function AddItem(props) {
             placeholder="Item Description"
             ref={descfieldRef}
             onFocus={onInputClarity}
+            defaultValue={props.item.desc}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="form_Owner">
@@ -68,6 +71,7 @@ function AddItem(props) {
             placeholder="Numeric ID of owner"
             ref={ownerfieldRef}
             onFocus={onInputClarity}
+            defaultValue={props.item.owner}
           />
         </Form.Group>
       </Modal.Body>
@@ -83,4 +87,4 @@ function AddItem(props) {
   );
 }
 
-export default AddItem;
+export default EditItem;

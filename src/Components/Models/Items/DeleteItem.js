@@ -3,10 +3,10 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import ModalContext from "../../../Context/modal-context";
 import { useDispatch } from "react-redux";
-import { removeUser } from "../../../Context/user-redux-slice";
 import Table from "react-bootstrap/Table";
+import { removeItemR } from "../../../Context/items-redux-slice";
 
-function DeleteUser(props) {
+function DeleteItem(props) {
   const modalCtx = useContext(ModalContext);
   const mc = modalCtx.setter;
 
@@ -19,7 +19,7 @@ function DeleteUser(props) {
     });
   }
   function onSaveHandle(oldData) {
-    dsp(removeUser(props.item.id));
+    dsp(removeItemR(props.item.id));
     onCloseHandle(oldData);
   }
 
@@ -39,8 +39,12 @@ function DeleteUser(props) {
               <td >{props.item.id}</td>
             </tr>
             <tr>
-              <td className='fw-bold'>Name: </td>
-              <td >{props.item.name}</td>
+              <td className='fw-bold'>Description: </td>
+              <td >{props.item.desc}</td>
+            </tr>
+            <tr>
+              <td className='fw-bold'>Owner: </td>
+              <td >{props.item.owner}</td>
             </tr>
           </tbody>
         </Table>
@@ -50,11 +54,11 @@ function DeleteUser(props) {
           Close
         </Button>
         <Button variant="danger" onClick={onSaveHandle}>
-          DeleteUser
+          Delete Item
         </Button>
       </Modal.Footer>
     </Fragment>
   );
 }
 
-export default DeleteUser;
+export default DeleteItem;

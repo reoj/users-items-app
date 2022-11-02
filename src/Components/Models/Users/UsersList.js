@@ -1,12 +1,11 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
+import { useSelector } from "react-redux";
 import TableDisplayer from "../../UI/TableDisplayer";
 import UserSingle from "./UserSingle";
-import { useSelector } from "react-redux";
-import ModalContext from "../../../Context/modal-context";
+
 
 function UsersList(props) {
-  const mdlCtx = useContext(ModalContext);
-  const usersList = useSelector((state) => state.users.value.list);
+  const usersList = useSelector((state) => state.root.user.value.list);
 
   const properties = ["ID", "Name"];
 
@@ -19,7 +18,6 @@ function UsersList(props) {
               key={"User__" + u.id.toString()}
               idn={u.id}
               name={u.name}
-              modalCtx={mdlCtx}
             />
           );
         })}

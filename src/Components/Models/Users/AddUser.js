@@ -4,7 +4,7 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import ModalContext from "../../../Context/modal-context";
 import { useDispatch } from "react-redux";
-import { add } from "../../../Context/user-redux-slice";
+import { addUserR } from "../../../Context/user-redux-slice";
 
 function AddUser(props) {
   const modalCtx = useContext(ModalContext)
@@ -22,7 +22,7 @@ function AddUser(props) {
   }
   function onSaveHandle(oldData) {
     if (namefieldRef.current.value !== "") {
-      dsp(add(namefieldRef.current.value))
+      dsp(addUserR(namefieldRef.current.value))
       onCloseHandle(oldData);
     } else {
       namefieldRef.current.className = "form-control bg-danger";
