@@ -8,7 +8,7 @@ function FilteredItems(props) {
   const fullList = useSelector((state) => state.root.item.value.list);
   const userOnDisplay = useParams();
 
-  const itemsList = fullList.filter(i=> i.owner == +userOnDisplay.userId)
+  const itemsList = fullList.filter(i=> i.owner === +userOnDisplay.userId)
 
   const properties = ["ID", "Description", "State", "Owner ID"];
 
