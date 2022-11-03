@@ -14,7 +14,7 @@ function ItemSingle(props) {
       title: "Editing Item",
       body: (
         <EditItem
-          item={{ id: props.idn, desc: props.description, owner: props.owner }}
+          item={{ id: props.idn, desc: props.description, st:props.state, owner: props.owner}}
         />
       ),
     });
@@ -26,7 +26,7 @@ function ItemSingle(props) {
       title: "Please confirm deletion of the following Item",
       body: (
         <DeleteItem
-          item={{ id: props.idn, desc: props.description, owner: props.owner }}
+          item={{ id: props.idn, desc: props.description, st:props.state, owner: props.owner}}
         />
       ),
     });

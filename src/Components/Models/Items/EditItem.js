@@ -12,6 +12,7 @@ function EditItem(props) {
 
   const ownerfieldRef = useRef();
   const descfieldRef = useRef()
+  const stfieldRef = useRef()
 
   const dsp = useDispatch();
 
@@ -22,7 +23,7 @@ function EditItem(props) {
     });
   }
   function onSaveHandle(oldData) {
-    const emptyFields = checkNoNulls([descfieldRef, ownerfieldRef]);
+    const emptyFields = checkNoNulls([descfieldRef, ownerfieldRef, stfieldRef]);
     if (emptyFields.length !== 0) {
       emptyFields.forEach((f) => {
         f.current.className = "form-control bg-danger";
@@ -34,6 +35,7 @@ function EditItem(props) {
         id: props.item.id,
         desc: descfieldRef.current.value,
         owner: ownerfieldRef.current.value,
+        state:stfieldRef.current.value
       })
     );
     onCloseHandle(oldData);
@@ -62,6 +64,16 @@ function EditItem(props) {
             ref={descfieldRef}
             onFocus={onInputClarity}
             defaultValue={props.item.desc}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="form_Owner">
+          <Form.Label>State</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Item State"
+            ref={stfieldRef}
+            onFocus={onInputClarity}
+            defaultValue={props.item.st}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="form_Owner">

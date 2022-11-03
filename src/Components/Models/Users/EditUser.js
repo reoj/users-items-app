@@ -31,8 +31,9 @@ function EditUser(props) {
     }
     dsp(
       editUserR({
+        id:props.item.id,
         name: namefieldRef.current.value,
-        cl: clfieldRef.current.value,
+        utype: clfieldRef.current.value,
       })
     );
     onCloseHandle(oldData);
