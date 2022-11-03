@@ -10,7 +10,7 @@ export const userSlice = createSlice({
     addUserR: (state, action) => {
       const next = state.value.list.length + 1;
       const nwList = state.value.list;
-      nwList.push({ id: next, name: action.payload });
+      nwList.push({ id: next, name: action.payload.name, utype:action.payload.cl });
       state.value.list = nwList;
     },
     removeUser: (state, action) => {
