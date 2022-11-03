@@ -42,6 +42,10 @@ function DeleteUser(props) {
               <td className='fw-bold'>Name: </td>
               <td >{props.item.name}</td>
             </tr>
+            <tr>
+              <td className='fw-bold'>Class: </td>
+              <td >{props.item.cl}</td>
+            </tr>
           </tbody>
         </Table>
       </Modal.Body>

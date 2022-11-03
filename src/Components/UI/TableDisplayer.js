@@ -21,7 +21,7 @@ function TableDisplayer(props) {
       setModalProperties({
         onDisplay: true,
         title: "Adding User",
-        body: <AddUser/>,
+        body: <AddUser />,
       });
     }
     if (props.modelType === "Items") {
@@ -44,12 +44,12 @@ function TableDisplayer(props) {
             controller={setModalProperties}
           />
         )}
-        <OffcanvasHeader className="fs-3 mb-3 col-1">
+        <OffcanvasHeader className="fs-3 mb-3 col-1 w-50">
           {props.modelType}
         </OffcanvasHeader>
-        <Button className="col-2" onClick={AddHandler}>
+        {props.modelType !== "Filtered Items" && <Button className="col-2" onClick={AddHandler}>
           + Add {props.modelType}
-        </Button>
+        </Button>}
 
         <Table
           className="table table-striped

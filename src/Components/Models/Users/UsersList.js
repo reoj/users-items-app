@@ -7,7 +7,7 @@ import UserSingle from "./UserSingle";
 function UsersList(props) {
   const usersList = useSelector((state) => state.root.user.value.list);
 
-  const properties = ["ID", "Name"];
+  const properties = ["ID", "Name", "Class", "Items"];
 
   return (
     <Fragment>
@@ -18,6 +18,7 @@ function UsersList(props) {
               key={"User__" + u.id.toString()}
               idn={u.id}
               name={u.name}
+              cl = {u.utype}
             />
           );
         })}

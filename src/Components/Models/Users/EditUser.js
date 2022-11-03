@@ -11,6 +11,7 @@ function EditUser(props) {
   const mc = modalCtx.setter;
 
   const namefieldRef = useRef();
+  const clfieldRef = useRef();
 
   const dsp = useDispatch();
 
@@ -21,21 +22,37 @@ function EditUser(props) {
     });
   }
   function onSaveHandle(oldData) {
-    if (namefieldRef.current.value !== "") {
-      dsp(editUserR({id:props.item.id, name:namefieldRef.current.value}));
-      onCloseHandle(oldData);
-    } else {
-      namefieldRef.current.className = "form-control bg-danger";
+    const emptyFields = checkNoNulls([namefieldRef, clfieldRef]);
+    if (emptyFields.length !== 0) {
+      emptyFields.forEach((f) => {
+        f.current.className = "form-control bg-danger";
+      });
+      return;
     }
+    dsp(
+      editUserR({
+        name: namefieldRef.current.value,
+        cl: clfieldRef.current.value,
+      })
+    );
+    onCloseHandle(oldData);
   }
   function onInputClarity(event) {
     event.target.className = "form-control";
   }
-
+  function checkNoNulls(arrayOfRefs) {
+    const allEmptyFields = [];
+    arrayOfRefs.forEach((r) => {
+      if (r.current.value === "") {
+        allEmptyFields.push(r);
+      }
+    });
+    return allEmptyFields;
+  }
   return (
     <Form>
       <Modal.Body>
-        <Form.Group className="mb-3" controlId="form_Name">
+      <Form.Group className="mb-3" controlId="form_Name">
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
@@ -43,6 +60,16 @@ function EditUser(props) {
             ref={namefieldRef}
             onFocus={onInputClarity}
             defaultValue={props.item.name}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="form_Name">
+          <Form.Label>Class</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="User Class"
+            ref={clfieldRef}
+            onFocus={onInputClarity}
+            defaultValue={props.item.cl}
           />
         </Form.Group>
       </Modal.Body>

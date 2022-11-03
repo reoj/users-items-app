@@ -35,6 +35,8 @@ function ItemSingle(props) {
     <tr>
       <td>{props.idn}</td>
       <td>{props.description}</td>
+      
+      <td>{props.state}</td>
       <td>{props.owner}</td>
       <ActionButtons
         clickForEdit={onEditHandler}

@@ -4,6 +4,8 @@ import { Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import UsersList from "../Models/Users/UsersList";
 import ItemsList from "../Models/Items/ItemsList";
+import FilteredItems from "../Models/Items/FilteredItems";
+
 
 import store from "../../Context/store-redux"
 import Landing from "./Landing";
@@ -22,6 +24,9 @@ function MainDisplay() {
           </Route>
           <Route path="/Items">
             <ItemsList/>
+          </Route>
+          <Route path="/Filtered-items/:userId">
+            <FilteredItems/>
           </Route>
         </Provider>
       </Container>

@@ -11,6 +11,7 @@ function AddUser(props) {
   const mc = modalCtx.setter;
 
   const namefieldRef = useRef();
+  const clfieldRef = useRef();
 
   const dsp = useDispatch()
 
@@ -21,15 +22,33 @@ function AddUser(props) {
     });
   }
   function onSaveHandle(oldData) {
-    if (namefieldRef.current.value !== "") {
-      dsp(addUserR(namefieldRef.current.value))
-      onCloseHandle(oldData);
-    } else {
-      namefieldRef.current.className = "form-control bg-danger";
+    const emptyFields = checkNoNulls([namefieldRef, clfieldRef]);
+    if (emptyFields.length !== 0) {
+      emptyFields.forEach((f) => {
+        f.current.className = "form-control bg-danger";
+      });
+      return;
     }
+    dsp(
+      addUserR({
+        name: namefieldRef.current.value,
+        cl: clfieldRef.current.value,
+      })
+    );
+    onCloseHandle(oldData);
   }
   function onInputClarity(event) {
+    // event..className = "form-control"
     event.target.className = "form-control";
+  }
+  function checkNoNulls(arrayOfRefs) {
+    const allEmptyFields = [];
+    arrayOfRefs.forEach((r) => {
+      if (r.current.value === "") {
+        allEmptyFields.push(r);
+      }
+    });
+    return allEmptyFields;
   }
 
   return (
@@ -41,6 +60,16 @@ function AddUser(props) {
             type="text"
             placeholder="User Name"
             ref={namefieldRef}
+            onFocus={onInputClarity}
+            defaultValue={""}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="form_Name">
+          <Form.Label>Class</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="User Class"
+            ref={clfieldRef}
             onFocus={onInputClarity}
             defaultValue={""}
           />

@@ -1,17 +1,21 @@
-import React, { Fragment} from "react";
+import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import TableDisplayer from "../../UI/TableDisplayer";
 import ItemSingle from "./ItemSingle";
 
-function ItemsList(props) {
-  const itemsList = useSelector((state) => state.root.item.value.list);
+function FilteredItems(props) {
+  const fullList = useSelector((state) => state.root.item.value.list);
+  const userOnDisplay = useParams();
 
-  const properties = ["ID", "Description", "State","Owner ID"];
+  const itemsList = fullList.filter(i=> i.owner == +userOnDisplay.userId)
+
+  const properties = ["ID", "Description", "State", "Owner ID"];
 
   return (
     <Fragment>
     <TableDisplayer
-      modelType="Items"
+      modelType="Filtered Items"
       colList={properties}
     >
       {itemsList.map((i) => {
@@ -20,8 +24,8 @@ function ItemsList(props) {
             key={"Item" + i.id.toString()}
             idn={i.id}
             description={i.desc}
-            owner={i.owner}
             state={i.state}
+            owner={i.owner}
           />
         );
       })}
@@ -30,4 +34,4 @@ function ItemsList(props) {
   );
 }
 
-export default ItemsList;
+export default FilteredItems;
