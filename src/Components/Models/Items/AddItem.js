@@ -9,6 +9,8 @@ import ModalContext from "../../../Context/modal-context";
 function AddItem(props) {
   const descfieldRef = useRef();
   const ownerfieldRef = useRef();
+  const stfieldRef = useRef()
+
   const dsp = useDispatch();
 
   const modalCtx = useContext(ModalContext)
@@ -31,6 +33,7 @@ function AddItem(props) {
     dsp(
       addItemR({
         desc: descfieldRef.current.value,
+        state: stfieldRef.current.value,
         owner: ownerfieldRef.current.value,
       })
     );
@@ -59,6 +62,16 @@ function AddItem(props) {
             placeholder="Item Description"
             ref={descfieldRef}
             onFocus={onInputClarity}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="form_Owner">
+          <Form.Label>State</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Item State"
+            ref={stfieldRef}
+            onFocus={onInputClarity}
+            defaultValue={""}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="form_Owner">
