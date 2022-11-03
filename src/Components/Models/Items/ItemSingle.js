@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 import ModalContext from "../../../Context/modal-context";
 import ActionButtons from "../../UI/ActionButtons";
 import DeleteItem from "./DeleteItem";
